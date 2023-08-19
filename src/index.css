@@ -1,0 +1,17 @@
+/* Texto Principal: Negro (#000000) - Para un alto contraste con fondos claros.
+Texto Secundario: Gris Oscuro (#34495E) - Para un contraste menos intenso en fondos claros.
+Texto en Verde Claro: Blanco (#FFFFFF) - Para resaltar en fondos verdes claros.
+Texto en Verde Oscuro: Blanco (#FFFFFF) - Para resaltar en fondos verdes oscuros. */
+*{
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root{
+    --primaryGreen: #2ECC71;
+    --lightGreen: #A9DFBF;
+    --darkGren: #27AE60;
+    --grisLight: #D5DBDB;
+    --grisDark: #34495E;
+}

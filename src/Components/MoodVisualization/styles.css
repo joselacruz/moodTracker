@@ -1,0 +1,49 @@
+.MoodVisualization-container{
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.MoodVisualization-container h3 {
+    background-color: #A9DFBF;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    
+}
+.mood-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-block-end: 10px;
+    width: max-content;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.mood-value-container{
+    width: 180px;
+}
+.mood-edit{
+    border: 1px solid var(--grisDark);
+    color: var(--grisDark);
+    padding: 2px;
+    font-size: 20px;
+    border-radius: 50%;
+}
+.value-emotion span{
+    font-weight: bold;
+    font-size: 16px;
+}
+.value-hrs{
+    font-weight: 300;
+}

@@ -1,0 +1,27 @@
+.Layout{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.saved-mood{
+    width: 146px;
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: var(--lightGreen);
+    margin-top: 20px;
+}
+
+.saved-mood:active{
+    background-color: var(--darkGren) ;
+}
+.active {
+    background-color: var(--primaryGreen);
+}
