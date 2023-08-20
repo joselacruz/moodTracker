@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { FaSmile, FaSadTear, FaMeh, FaAngry, FaGrinStars } from 'react-icons/fa';
+import { FaSmile, FaSadTear, FaMeh, FaAngry, } from 'react-icons/fa';
 import './MoodSelection.css';
 import { MoodContext } from '../../Context';
-import  {formatDate} from '../../Utils/dateUtils';
+
 
 
 function MoodSelection() {
@@ -17,13 +17,11 @@ function MoodSelection() {
     { value: 'Horrible', icon: <FaSadTear size={64} color="#8B0000" /> }
   ];
 
-  const currentDate = new Date();
-  const formattedDate = formatDate(currentDate);
+ 
 
 
   return (
     <div>
-      <h2>¿Como estas hoy?</h2>
       <div className="mood-icons">
         {moodOptions.map((mood) => (
 
@@ -34,7 +32,7 @@ function MoodSelection() {
              
               value: mood.value,
               icon: mood.icon,
-              date: formattedDate,
+            
 
             })}
           >

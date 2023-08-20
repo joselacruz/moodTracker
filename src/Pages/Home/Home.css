@@ -1,7 +1,5 @@
-.Layout{
-    display: flex;
-    justify-content: center;
-    text-align: center;
+.Home-title{
+   color: var(--texto);
 }
 
 .saved-mood{

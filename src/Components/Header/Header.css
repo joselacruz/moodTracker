@@ -1,0 +1,51 @@
+nav {
+    width: 100%;
+    background-color: #121a22; /* Un tono oscuro para el fondo del nav */
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  nav ul {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  nav li {
+    width: 100px;
+    height: 30px;
+  }
+  
+  nav li a:hover {
+    background-color: #2ECC71; /* Un tono verde claro al pasar el ratón */
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.15), 0 0 40px rgba(0, 0, 0, 0.1); /* Cambio de sombra al pasar el ratón */
+  }
+  
+  nav li a:active {
+    background-color: #27AE60; /* Un tono más oscuro al estar activo */
+  }
+  
+  nav li a {
+    width: 100%;
+    background-color: #2c3e50; /* Un tono más oscuro para los enlaces */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    color: #ECF0F1; /* Un tono claro para el texto */
+    text-decoration: none;
+  }
+  
+  .activeStyle {
+    background-color: #27AE60; /* Un tono más oscuro para el enlace activo */
+  }
+  

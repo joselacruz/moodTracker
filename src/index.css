@@ -5,8 +5,14 @@ Texto en Verde Oscuro: Blanco (#FFFFFF) - Para resaltar en fondos verdes oscuros
 *{
     padding: 0;
     box-sizing: border-box;
+   
 }
 
+body{
+    margin: 0;
+    background-color: #F5F5F5;
+   
+}
 
 :root{
     --primaryGreen: #2ECC71;
@@ -14,4 +20,5 @@ Texto en Verde Oscuro: Blanco (#FFFFFF) - Para resaltar en fondos verdes oscuros
     --darkGren: #27AE60;
     --grisLight: #D5DBDB;
     --grisDark: #34495E;
+    --texto: #333333;
 }

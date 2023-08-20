@@ -10,6 +10,9 @@ export const MoodProvider = ({ children }) => {
     const [savedMood, setSavedMood] = useState([]);
    
     const [groupedObjects,setGroupedObjects] = useState([]);
+
+
+    const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <MoodContext.Provider
       value={{
@@ -21,6 +24,9 @@ export const MoodProvider = ({ children }) => {
         setSavedMood,
         groupedObjects,
         setGroupedObjects,
+        selectedDate,
+        setSelectedDate
+
       }}
     >
       {children}

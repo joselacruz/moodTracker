@@ -11,7 +11,7 @@ const DiaryEntry = ({ diaryEntry, setDiaryEntry }) => {
       <textarea
         value={context.diaryEntry}
         onChange={(e) => context.setDiaryEntry(e.target.value)}
-        placeholder="Que te hace sentir asi el Dia de Hoy"
+        placeholder="Que te hace sentir asi"
         className='DiaryEntry'
       />
     </div>

@@ -1,12 +1,13 @@
 import {useRoutes, BrowserRouter} from  'react-router-dom';
-import Screen1 from '../../Pages/Screen1'
+import Home from '../../Pages/Home'
 import Screen2 from '../../Pages/Screen2'
 import {MoodProvider} from '../../Context/index'
+import Header from '../../Components/Header';
 const App = ()  => {
     const AppRoutes = () => {
         let routes = useRoutes ([
-          {path: '/',element: <Screen1/>},
-          {path: '/category',element: <Screen2/>},
+          {path: '/',element: <Home/>},
+          {path: '/calendar',element: <Screen2/>},
         ])
         return routes;
       }
@@ -16,6 +17,7 @@ const App = ()  => {
       <>
   <MoodProvider> 
    <BrowserRouter>
+   <Header/>
     <AppRoutes/>
    </BrowserRouter>
    </MoodProvider>
