@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { MoodContext } from "../../Context";
-
+import "./DropdownCalendar.css"; 
 
 const DropdownCalendar = () => {
   const context = useContext(MoodContext);

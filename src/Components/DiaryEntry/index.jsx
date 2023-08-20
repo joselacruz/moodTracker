@@ -3,7 +3,7 @@ import { MoodContext } from '../../Context';
 import './styles.css'
 
 
-const DiaryEntry = ({ diaryEntry, setDiaryEntry }) => {
+const DiaryEntry = () => {
   const context = useContext(MoodContext);
   return (
     <div>
