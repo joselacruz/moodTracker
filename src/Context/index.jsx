@@ -14,7 +14,8 @@ export const MoodProvider = ({ children }) => {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    console.log(selectedDate, "fecha");
+    const [monthToFilterChart , setMonthToFilterChart ] = useState(new Date());
+
   return (
     <MoodContext.Provider
       value={{
@@ -27,7 +28,9 @@ export const MoodProvider = ({ children }) => {
         groupedObjects,
         setGroupedObjects,
         selectedDate,
-        setSelectedDate
+        setSelectedDate,
+        monthToFilterChart,
+        setMonthToFilterChart
 
       }}
     >

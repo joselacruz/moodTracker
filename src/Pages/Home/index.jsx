@@ -61,8 +61,7 @@ const Home = () => {
   // Manejar la vista de emociones guardadas
   const handleMoodsView = (event) => {
     if (areConditionsMet()) {
-      console.log("si");
-      console.log(formatDate(context.selectedDate), "fecha que envio");
+     
       // Si ya se seleccionó un MoodSelection y se escribió en diaryEntry, guardar
       context.setSavedMood([...context.savedMood, { ...context.selectedMood, date: formatDate(context.selectedDate), diaryEntry: context.diaryEntry }]);
       

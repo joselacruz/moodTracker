@@ -6,7 +6,7 @@ import './styles.css'
 const DiaryEntry = () => {
   const context = useContext(MoodContext);
   return (
-    <div>
+    <div className='DiaryEntry'>
       <h2>Diario:</h2>
       <textarea
         value={context.diaryEntry}

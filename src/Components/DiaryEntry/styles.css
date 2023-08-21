@@ -1,8 +1,11 @@
-.DiaryEntry{
+.DiaryEntry textarea{
     padding: 10px;
     max-width: 290px;
     min-height: 40px;
     max-height: 100px;
     font-size: 16px;
+}
 
+.DiaryEntry h2{
+    color: var(--texto);
 }
