@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaEllipsisH } from "react-icons/fa";
 import { MoodContext } from "../../Context";
 import MoodItem from "../MoodItem";
 import "./styles.css";
@@ -10,7 +9,17 @@ const MoodVisualization = () => {
   // Crear un array para almacenar objetos agrupados por date.groups
   const [groupedObjects, setGroupedObjects] = useState([]);
 
+  // Verificar si la fechas Corresponde a Hoy
+  const IsToday = (date) => {
+    const currentDate = new Date();
+    const formattedSelectedDate = new Date(date);
 
+    // Comparar las fechas sin la hora
+    const isSameDay =
+      formattedSelectedDate.toDateString() === currentDate.toDateString();
+
+    return isSameDay;
+  };
 
   useEffect(() => {
     const tempGroupedObjects = [];
@@ -21,42 +30,33 @@ const MoodVisualization = () => {
       const existingGroup = tempGroupedObjects.find(
         (group) => group.groups === groups
       );
-     
-
 
       if (existingGroup) {
         existingGroup.items.push(item);
       } else {
         tempGroupedObjects.push({ groups, items: [item] });
       }
+    }, []);
 
-    },[]);
-
-    // tempGroupedObjects.push({
-    //   groups: "3333", // Valor hardcodeado
-    //   items: [
-    //     // Aquí puedes agregar objetos individuales dentro del grupo
-    //     // Ejemplo: { date: ..., value: ..., id: ... }
-    //   ],
-    // });
     setGroupedObjects(tempGroupedObjects);
   }, [context.savedMood]);
 
-
-
   return (
     <div className="MoodVisualization">
-      <h2>Visualización de estado de ánimo:</h2>
-
       {groupedObjects.map((grupos, index) => {
+        const dayIsToday = IsToday(grupos.groups);
         const [day, mes, _] = grupos.groups.split("-");
+
         return (
           <div key={index} className="MoodVisualization-container">
-            <h3>{`${day} de ${mes}`}</h3>
+            {/* titulo del contenedor cambia si la fecha es Hoy */}
+            {dayIsToday ? (
+              <h3>{`Hoy ${day} de ${mes}`}</h3>
+            ) : (
+              <h3>{`${day} de ${mes}`}</h3>
+            )}
             {grupos.items.map((item, index) => {
-              return (
-                <MoodItem props={item} key={index}/>
-              );
+              return <MoodItem props={item} key={index} />;
             })}
           </div>
         );

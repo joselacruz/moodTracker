@@ -1,0 +1,12 @@
+
+.iconBack {
+    font-size: 28px;
+    position: absolute;
+    left: calc(50% - 180px);
+    top: 12px;
+    color: var(--texto);
+    cursor: pointer;
+ }
+ .iconBack a{
+    background-color: none;
+ }

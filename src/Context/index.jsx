@@ -13,6 +13,8 @@ export const MoodProvider = ({ children }) => {
 
 
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+    console.log(selectedDate, "fecha");
   return (
     <MoodContext.Provider
       value={{

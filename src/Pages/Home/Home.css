@@ -23,3 +23,11 @@
 .active {
     background-color: var(--primaryGreen);
 }
+
+@media (min-width: 980px) {
+    .Home{
+        display: flex;
+        align-items:baseline;
+        gap: 10px;
+    }
+  }

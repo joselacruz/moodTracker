@@ -21,7 +21,7 @@ function MoodSelection() {
 
 
   return (
-    <div>
+    <div className='MoodSelection'>
       <div className="mood-icons">
         {moodOptions.map((mood) => (
 
