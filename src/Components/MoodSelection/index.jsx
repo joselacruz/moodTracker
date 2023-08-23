@@ -10,7 +10,7 @@ function MoodSelection() {
  const context = useContext(MoodContext);
 
   const moodOptions = [
-    { value: 'Feliz', icon: <FaSmile size={64} color="#FFD700" /> },
+    { value: 'Feliz', icon: <FaSmile size={64} color="#FFD700"/> },
     { value: 'Triste', icon: <FaSadTear size={64} color="#6495ED" /> },
     { value: 'Neutral', icon: <FaMeh size={64} color="#A9A9A9" /> },
     { value: 'Enojado', icon: <FaAngry size={64} color="#FF6347" /> },

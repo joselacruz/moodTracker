@@ -1,20 +1,31 @@
-import { createContext, useState,} from "react";
+import { createContext, useState, useContext, useEffect} from "react";
+import {UserContext}  from "./userContext";
 
 export const MoodContext = createContext();
 
+
 export const MoodProvider = ({ children }) => {
-    const [selectedMood, setSelectedMood] = useState({});
-    const [diaryEntry, setDiaryEntry] = useState("");
-    
-    //Saved Mood
-    const [savedMood, setSavedMood] = useState([]);
-   
-    const [groupedObjects,setGroupedObjects] = useState([]);
+  
+  const contextIsUserAuth = useContext(UserContext);
 
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
+  //Mood Seleccionado
+  const [selectedMood, setSelectedMood] = useState({});
+  //Text Area del Diary
+  const [diaryEntry, setDiaryEntry] = useState("");
 
-    const [monthToFilterChart , setMonthToFilterChart ] = useState(new Date());
+  //Estado para el historial de usuario 
+  const [savedMood, setSavedMood] = useState([]);
+  
+ useEffect(()=> {
+  setSavedMood(contextIsUserAuth.moodHistoyUser);
+ },[contextIsUserAuth.moodHistoyUser])
+
+  const [groupedObjects, setGroupedObjects] = useState([]);
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const [monthToFilterChart, setMonthToFilterChart] = useState(new Date());
 
   return (
     <MoodContext.Provider
@@ -30,12 +41,10 @@ export const MoodProvider = ({ children }) => {
         selectedDate,
         setSelectedDate,
         monthToFilterChart,
-        setMonthToFilterChart
-
+        setMonthToFilterChart,
       }}
     >
       {children}
     </MoodContext.Provider>
   );
-
-}
+};

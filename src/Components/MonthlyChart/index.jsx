@@ -14,9 +14,12 @@ import {
 
 import "./MonthlyChart.css";
 
+import {UserContext}  from "../../Context/userContext";
+
 const MonthlyChart = () => {
   // Obtener el contexto de las emociones
   const context = useContext(MoodContext);
+  const context2 = useContext(UserContext);
 
   // Estado local para almacenar los datos filtrados y necesarios
   const [dataForChart, setDataForChart] = useState([]);
