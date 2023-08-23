@@ -18,6 +18,7 @@ const UserDetail = () => {
   };
   const handleClick = () => {
     context.setMenuMobile(false); 
+    
     if (contexUserIsAuth.user) {
       const handleLogout = async () => {
         try {
@@ -26,7 +27,7 @@ const UserDetail = () => {
           //a todos los componentes que  nuestra seccion culmino
           contexUserIsAuth.setUser(false);
           contexUserIsAuth.setUserEmail(""); //sin email para mostrar
-          navigate('/');
+          window.location.pathname = "/";
         } catch (error) {
           // Manejo de errores si es necesario
         }

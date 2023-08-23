@@ -9,6 +9,7 @@ import { FaUserAlt } from "react-icons/fa";
 import "./Header.css";
 
 
+
 const Header = () => {
   const [openUserDetail, setOpenUserDetail] = useState(false);
   const context =  useContext(MoodContext);
