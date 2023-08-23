@@ -11,7 +11,7 @@ const Trends = () => {
       <NavLink className="iconBack-trends" to="/">
         <HiChevronDoubleLeft />
       </NavLink>
-      <div style={{ display: "flex" }}>
+      <div className="Trends">
         <CalendarMonthlyChart />
         <MonthlyChart />
       </div>

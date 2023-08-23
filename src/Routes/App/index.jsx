@@ -6,6 +6,7 @@ import {MoodProvider} from '../../Context/index';
 import Header from '../../Components/Header';
 import Login from '../../Pages/Login';
 import {UserProvider} from  '../../Context/userContext';
+import  CreateAccount from '../../Pages/CreateAccount';
 const App = ()  => {
     const AppRoutes = () => {
         let routes = useRoutes ([
@@ -13,6 +14,7 @@ const App = ()  => {
           {path: '/calendar',element: <Calendar/>},
           {path: '/trends',element: <Trends/>},
           {path: '/login',element: <Login/>},
+          {path: '/signup',element: <CreateAccount/>},
         ])
         return routes;
       }

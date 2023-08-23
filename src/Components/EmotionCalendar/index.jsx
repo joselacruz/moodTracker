@@ -13,6 +13,8 @@ const EmotionCalendar = () => {
   //emociones a mostrar por fecha
   const [showEmotionsByDate, setShowEmotionsByDate] = useState([]);
 
+
+
   //calendario  movil
   const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
 

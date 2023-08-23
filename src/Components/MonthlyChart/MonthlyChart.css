@@ -1,6 +1,7 @@
 .MonthlyChart {
     text-align: center;
     padding: 20px;
+    width: 600px;
   }
   .MonthlyChart h3 {
     color: var(--texto);

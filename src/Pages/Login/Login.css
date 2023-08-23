@@ -22,7 +22,7 @@
 	flex-direction: column;
 }
 .form a {
-	color: var(--darkGren);
+	color: var(--primaryGreen);
 	font-weight: bolder;
 	text-align: center;
 	text-decoration: none;
@@ -45,7 +45,7 @@
 	margin-bottom: 22px;
 }
 .primary-button {
-	background-color: var(--darkGren);
+	background-color:var(--primaryGreen);
 	border-radius: 8px;
 	border: none;
 	color: #ffffff;
@@ -53,11 +53,14 @@
 	cursor: pointer;
 	font-weight: bold;
 	height: 50px;
+	transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px rgb(0 0 0 / 20%), 0px 0px 5px rgb(0 0 0 / 10%), 0px 0px 5px rgb(0 0 0 / 10%);
+    border-radius: 4px;
 }
 .secondary-button {
 	background-color: var(--white);
 	border-radius: 8px;
-	border: 1px solid var(--darkGren);
+	border: 1px solid var(--primaryGreen);
 	color: var(--darkGren);
 	width: 100%;
 	cursor: pointer;
@@ -67,6 +70,10 @@
 .login-button {
 	margin-top: 14px;
 	margin-bottom: 30px;
+}
+
+.primary-button:hover{
+background-color: var(--darkGren);
 }
 @media (max-width: 640px) {
 	.logo {

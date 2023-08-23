@@ -18,7 +18,11 @@ export const MoodProvider = ({ children }) => {
   const [savedMood, setSavedMood] = useState([]);
   
  useEffect(()=> {
-  setSavedMood(contextIsUserAuth.moodHistoyUser);
+
+  if(contextIsUserAuth.user === true) {
+    setSavedMood(contextIsUserAuth.moodHistoyUser);
+  }
+  
  },[contextIsUserAuth.moodHistoyUser])
 
   const [groupedObjects, setGroupedObjects] = useState([]);
@@ -26,6 +30,7 @@ export const MoodProvider = ({ children }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const [monthToFilterChart, setMonthToFilterChart] = useState(new Date());
+
 
   return (
     <MoodContext.Provider

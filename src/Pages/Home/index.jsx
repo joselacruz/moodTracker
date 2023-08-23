@@ -3,15 +3,17 @@ import MoodSelection from "../../Components/MoodSelection";
 import DiaryEntry from "../../Components/DiaryEntry";
 import MoodVisualization from "../../Components/MoodVisualization";
 import { MoodContext } from "../../Context";
+import { UserContext } from "../../Context/userContext";
 import DropdownCalendar from "../../Components/DropdownCalendar";
 import { formatDate } from "../../Utils/dateUtils";
 import Layout from "../../Components/Layout";
 import { saveToFirebase } from "../../Utils/firebase";
+
 import "./Home.css";
-import { json } from "react-router-dom";
 
 const Home = () => {
   const context = useContext(MoodContext);
+  const contextIsUserAuth = useContext(UserContext);
   const [buttonColor, setButtonColor] = useState("");
 
   const [isToday, setIsToday] = useState(false);
@@ -80,15 +82,17 @@ const Home = () => {
           diaryEntry: context.diaryEntry,
         },
       ]);
-      //Guardar Datos en Firebase Siempre que El usuario este auntenticado 
-      context.user
-        ? saveToFirebase({
-            diaryEntry: context.diaryEntry,
-            value: context.selectedMood.value,
-            date: formatDate(context.selectedDate),
-          },context.user) //id de la coleccion user.uid
+      //Guardar Datos en Firebase Siempre que El usuario este auntenticado
+      contextIsUserAuth.user
+        ? saveToFirebase(
+            {
+              diaryEntry: context.diaryEntry,
+              value: context.selectedMood.value,
+              date: formatDate(context.selectedDate),
+            },
+            contextIsUserAuth.userUid
+          ) //id Unico de la coleccion user.uid
         : null;
-
 
       // Al guardar, reiniciar el estado de la emoción y el texto
       context.setSelectedMood({});

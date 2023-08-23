@@ -1,8 +1,6 @@
-import { createContext, useState,useEffect} from "react";
+import { createContext, useState, useEffect } from "react";
 import { FaSmile, FaSadTear, FaMeh, FaAngry } from "react-icons/fa";
-
 import { checkUserAuth, readFirebase } from "../Utils/firebase.js";
-
 
 export const UserContext = createContext();
 
@@ -15,31 +13,35 @@ const icons = {
 };
 
 export const UserProvider = ({ children }) => {
- 
-    //Usuario Autenticado cambia a True
-    const [user , setUser] = useState(false);
+  //Usuario Autenticado cambia a True
+  const [user, setUser] = useState(false);
+  const [userUid, setUserUid] = useState("");
 
-    //Historial de Mood Usuario
-    const [moodHistoyUser, setMoodHistoyUser] = useState([]);
+  //
+  const [userEmail, setUserEmail] = useState("");
+  //Historial de Mood Usuario
+  const [moodHistoyUser, setMoodHistoyUser] = useState([]);
 
   //Autenticacion Usuario
 
-  //comprobar si el usuario fue esta Autenticado para guaradar su uid
+  //comprobar si el usuario fue esta Autenticado
   async function getUserUID() {
     try {
-      const uid = await checkUserAuth(); // Aquí tendrás el valor de user.uid o null
-      setUser(true); // actualizacion de estado usario Autenticado
-
-      moodHistory(uid) //ejecucion funcion para obtener los datos del usuario
+      const user = await checkUserAuth(); // de aquí obtendremos el valor de user.uid y el userEmail
+      if (user) {
+        setUser(true); // actualizacion de estado usario Autenticado
+        setUserEmail(user.email); //actualizacion del estado el email
+        moodHistory(user.uid); //ejecucion funcion para obtener el historial de datos del usuario
+        setUserUid(user.uid);
+      }
     } catch (error) {
       console.error(error);
     }
   }
-  
 
-//   Obtiene el Historial De Datos Del Usuario en Una Coleccion
-//   Cuya Identificacion Sera El uid
-    const  moodHistory = async (collectionName) => {
+  //   Obtiene el Historial De Datos Del Usuario en Una Coleccion
+  //   Cuya Identificacion Sera El uid
+  const moodHistory = async (collectionName) => {
     const obtainNewData = await readFirebase(collectionName);
 
     //Agreguegos Icono al  la Coleccion Obtenida
@@ -64,21 +66,24 @@ export const UserProvider = ({ children }) => {
       }
       return { ...item, icon: newPropertyValue };
     });
-    //Actualicemos el estado 
+    //Actualicemos el estado
     setMoodHistoyUser(addIconANewData);
   };
 
-  useEffect(()=> {
-    getUserUID()
-  }, []
-  )
-
+  useEffect(() => {
+    getUserUID();
+  }, [user]);
 
   return (
     <UserContext.Provider
       value={{
         user,
-        moodHistoyUser
+        setUser,
+        moodHistoyUser,
+        userEmail,
+        setUserEmail,
+        userUid,
+        setUserUid,
       }}
     >
       {children}
