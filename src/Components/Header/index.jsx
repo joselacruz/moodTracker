@@ -1,36 +1,37 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { MoodContext } from "../../Context";
 import { NavLink } from "react-router-dom";
 import ToogleMenu from "../TooogleMenu";
 import UserDetail from "../UserDetail";
-import { Portal } from "../Portal";
 import { PiMaskHappy } from "react-icons/pi";
 import { ImMenu } from "react-icons/im";
 import { FaUserAlt } from "react-icons/fa";
 import "./Header.css";
 
+
 const Header = () => {
   const [openUserDetail, setOpenUserDetail] = useState(false);
-  const [menuMobile, setMenuMobile] = useState(false);
+  const context =  useContext(MoodContext);
 
   const handleClick = () => {
     setOpenUserDetail(!openUserDetail);
   };
 
   const handleMenuMobile = () => {
-    setMenuMobile(!menuMobile);
+    context.setMenuMobile(!context.menuMobile);
   };
 
   const closeMenuMobile = () => {
-    setMenuMobile(false);
+    context.setMenuMobile(false);
   };
 
   useEffect(() => {
-    if (menuMobile) {
+    if (context.menuMobile) {
       document.body.style.overflow = "hidden"; // Desactivar scroll
     } else {
       document.body.style.overflow = "auto"; // Restablecer scroll
     }
-  }, [menuMobile]);
+  }, [context.menuMobile]);
   return (
     <nav>
       <ul className="nav-list">
@@ -71,7 +72,7 @@ const Header = () => {
         )}
       </ul>
 
-      {menuMobile && <ToogleMenu onClose={closeMenuMobile}>Hi</ToogleMenu>}
+      {context.menuMobile && <ToogleMenu onClose={closeMenuMobile}>Hi</ToogleMenu>}
     </nav>
   );
 };

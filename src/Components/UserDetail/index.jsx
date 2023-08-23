@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { UserContext } from "../../Context/userContext";
 import { signOutUser } from "../../Utils/firebase";
+import { MoodContext } from "../../Context";
 import { useNavigate } from "react-router-dom";
 import "./UserDetail.css";
 
 const UserDetail = () => {
+  const context = useContext(MoodContext);
   const navigate = useNavigate();
   const contexUserIsAuth = useContext(UserContext);
   const typeButton = () => {
@@ -15,6 +17,7 @@ const UserDetail = () => {
     }
   };
   const handleClick = () => {
+    context.setMenuMobile(false); 
     if (contexUserIsAuth.user) {
       const handleLogout = async () => {
         try {

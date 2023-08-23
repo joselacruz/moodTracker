@@ -30,7 +30,7 @@ export const MoodProvider = ({ children }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const [monthToFilterChart, setMonthToFilterChart] = useState(new Date());
-
+  const [menuMobile, setMenuMobile] = useState(false);
 
   return (
     <MoodContext.Provider
@@ -47,6 +47,8 @@ export const MoodProvider = ({ children }) => {
         setSelectedDate,
         monthToFilterChart,
         setMonthToFilterChart,
+        menuMobile, 
+        setMenuMobile
       }}
     >
       {children}
