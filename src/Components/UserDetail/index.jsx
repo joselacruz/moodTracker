@@ -11,9 +11,9 @@ const UserDetail = () => {
   const contexUserIsAuth = useContext(UserContext);
   const typeButton = () => {
     if (contexUserIsAuth.user) {
-      return <li onClick={handleClick}>SignOut</li>;
+      return <li onClick={handleClick}>Sign Out</li>;
     } else {
-      return <li onClick={handleClick}>SingIn</li>;
+      return <li onClick={handleClick}>Sing In</li>;
     }
   };
   const handleClick = () => {
