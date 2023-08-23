@@ -23,14 +23,14 @@ const UserDetail = () => {
           //a todos los componentes que  nuestra seccion culmino
           contexUserIsAuth.setUser(false);
           contexUserIsAuth.setUserEmail(""); //sin email para mostrar
-          window.location = "/";
+          navigate('/');
         } catch (error) {
           // Manejo de errores si es necesario
         }
       };
       handleLogout();
     } else {
-      return (window.location = "/login");
+      return (navigate('/login'));
     }
   };
   return (
