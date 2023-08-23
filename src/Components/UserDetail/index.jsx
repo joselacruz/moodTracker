@@ -32,7 +32,7 @@ const UserDetail = () => {
       };
       handleLogout();
     } else {
-      return (window.location.pathname = "/login");
+      return (window.location.pathname = "login");
     }
   };
   return (
