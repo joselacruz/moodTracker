@@ -8,6 +8,7 @@ import DropdownCalendar from "../../Components/DropdownCalendar";
 import { formatDate } from "../../Utils/dateUtils";
 import Layout from "../../Components/Layout";
 import { saveToFirebase } from "../../Utils/firebase";
+import axios from "axios";
 
 import "./Home.css";
 
@@ -48,7 +49,7 @@ const Home = () => {
     }
   };
 
-  // Función para verificar si fue selecionada una emocion y se escribio del diario
+  // Función areConditionsMet para verificar si fue selecionada una emocion y se escribio del diario
   const areConditionsMet = () => {
     return (
       Object.keys(context.selectedMood).length > 0 &&
@@ -72,33 +73,54 @@ const Home = () => {
 
   // Manejar la vista de emociones guardadas
   const handleMoodsView = (event) => {
-    if (areConditionsMet()) {
-      // Si ya se seleccionó un MoodSelection y se escribió en diaryEntry, guardar
-      context.setSavedMood([
-        ...context.savedMood,
-        {
-          ...context.selectedMood,
-          date: formatDate(context.selectedDate),
-          diaryEntry: context.diaryEntry,
-        },
-      ]);
-      //Guardar Datos en Firebase Siempre que El usuario este auntenticado
-      contextIsUserAuth.user
-        ? saveToFirebase(
-            {
-              diaryEntry: context.diaryEntry,
-              value: context.selectedMood.value,
-              date: formatDate(context.selectedDate),
-            },
-            contextIsUserAuth.userUid
-          ) //id Unico de la coleccion user.uid
-        : null;
+ console.log(analizeTextSetiment());
 
-      // Al guardar, reiniciar el estado de la emoción y el texto
-      context.setSelectedMood({});
-      context.setDiaryEntry("");
-    }
+    // if (areConditionsMet()) {
+    //   // Si ya se seleccionó un MoodSelection y se escribió en diaryEntry, guardar
+    //   context.setSavedMood([
+    //     ...context.savedMood,
+    //     {
+    //       ...context.selectedMood,
+    //       date: formatDate(context.selectedDate),
+    //       diaryEntry: context.diaryEntry,
+    //     },
+    //   ]);
+    //   //Guardar Datos en Firebase Siempre que El usuario este auntenticado
+    //   contextIsUserAuth.user
+    //     ? saveToFirebase(
+    //         {
+    //           diaryEntry: context.diaryEntry,
+    //           value: context.selectedMood.value,
+    //           date: formatDate(context.selectedDate),
+    //         },
+    //         contextIsUserAuth.userUid
+    //       ) //id Unico de la coleccion user.uid
+    //     : null;
+
+    //   // Al guardar, reiniciar el estado de la emoción y el texto
+    //   context.setSelectedMood({});
+    //   context.setDiaryEntry("");
+    // }
   };
+
+
+ const analizeTextSetiment = async () => {
+
+  const functionUrl = 'https://jocular-queijadas-9d022c.netlify.app/.netlify/functions/analizeText';
+  
+  const data = {
+    // Tu data aquí
+  };
+  
+  axios.post(functionUrl, data)
+    .then(response => {
+      console.log('Respuesta:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  
+ }
 
   return (
     <Layout>
