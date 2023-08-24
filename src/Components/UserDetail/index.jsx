@@ -1,12 +1,10 @@
 import { useContext } from "react";
-import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../Context/userContext";
 import { signOutUser } from "../../Utils/firebase";
 import { MoodContext } from "../../Context";
 import "./UserDetail.css";
 
 const UserDetail = () => {
-  const navigate = useNavigate(); 
   const context = useContext(MoodContext);
   const contexUserIsAuth = useContext(UserContext);
   const typeButton = () => {
@@ -34,7 +32,7 @@ const UserDetail = () => {
       };
       handleLogout();
     } else {
-      return navigate('/login');
+      return (window.location.pathname = "login");
     }
   };
   return (
