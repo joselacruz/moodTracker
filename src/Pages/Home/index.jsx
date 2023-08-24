@@ -106,7 +106,7 @@ const Home = () => {
 
  const analizeTextSetiment = async () => {
 
-  const functionUrl = 'https://jocular-queijadas-9d022c.netlify.app/.netlify/functions/analizeText';
+  const functionUrl = 'ttps://jocular-queijadas-9d022c.netlify.app/.netlify/functions/analizeText';
   
   const data = {
     // Tu data aquí
