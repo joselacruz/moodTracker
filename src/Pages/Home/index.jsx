@@ -106,19 +106,19 @@ const Home = () => {
 
  const analizeTextSetiment = async () => {
 
-  const functionUrl = 'ttps://jocular-queijadas-9d022c.netlify.app/.netlify/functions/analizeText';
+  const functionUrl = 'https://jocular-queijadas-9d022c.netlify.app/.netlify/functions/analizeText';
   
-  const data = {
-    // Tu data aquí
+  const queryParams = {
+    text: 'ayer gane la loteria',
   };
   
-  axios.post(functionUrl, data)
-    .then(response => {
-      console.log('Respuesta:', response.data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  axios.get(functionUrl, { params: queryParams })
+  .then(response => {
+    console.log(response.data); // Manejar la respuesta aquí
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
   
  }
 

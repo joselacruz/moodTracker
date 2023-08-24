@@ -10,7 +10,7 @@ exports.handler = async (event) => {
   }
 
   const headers = {
-    'Access-Control-Allow-Origin': 'http://localhost:5173', 
+    'Access-Control-Allow-Origin': '*', 
     'Access-Control-Allow-Headers': 'Content-Type',
   };
 
@@ -36,7 +36,7 @@ exports.handler = async (event) => {
           {
             role: "system",
             content:
-              "Eres un especialista en análisis de sentimientos, aprovechando tu experiencia en procesamiento de lenguaje natural e inteligencia emocional. Analiza el sentimiento del texto proporcionado y dime a cual mood se acerca mas:\n\n- Feliz\n- Triste\n- Neutral\n- Enojado\n- Horrible\n\nSolo responde con el mood y si no se ajusta a ningun mood responde :debes escribir de una manera mas descriptiva porque te sientes asi ",
+              "Eres un especialista en análisis de sentimientos, aprovechando tu experiencia en procesamiento de lenguaje natural e inteligencia emocional. Analiza el sentimiento del texto proporcionado y dime a cual mood se acerca mas:\n\n- Feliz\n- Triste\n- Neutral\n- Enojado\n- Horrible\n\nSolo responde con el mood ,y si no se ajusta a ningun mood responde unicamente esto: debes escribir de una manera mas descriptiva porque te sientes asi",
           },
           {
             role: "user",
