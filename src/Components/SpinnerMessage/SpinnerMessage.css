@@ -1,0 +1,27 @@
+.SpinnerMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--texto);
+    margin-top: 15px;
+  }
+  .SpinnerMessage p{
+    width: 50%;
+    color: var(--texto);
+    font-size: 14px;
+  }
+  .spinner-icon {
+    animation: spin 1s linear infinite;
+  }
+  
+  .spinner-text {
+    font-size: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
