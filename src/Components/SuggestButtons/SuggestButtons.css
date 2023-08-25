@@ -1,0 +1,31 @@
+.SuggestButtons{
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.suggest{
+    border-radius: 2px;
+    width: 70px;
+    color: #ffffff;
+    padding: 5px;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-suggest{
+    background-color: var(--grisDark);
+}
+
+.btn-clean{
+    background-color: var(--grisLight);
+    color: var(--texto);
+}
+.btn-suggest:hover{
+    opacity: 0.9;
+}
+.btn-clean:hover{
+    color: rgb(182, 52, 52);
+}

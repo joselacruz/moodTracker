@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MoodContext } from "../../Context";
 import MoodItem from "../MoodItem";
+import dayjs from "dayjs"; // Importa la biblioteca dayjs
 import "./MoodVisualization.css";
 
 const MoodVisualization = () => {
@@ -11,12 +12,11 @@ const MoodVisualization = () => {
 
   // Verificar si la fechas Corresponde a Hoy
   const IsToday = (date) => {
-    const currentDate = new Date();
-    const formattedSelectedDate = new Date(date);
+    const currentDate = dayjs();
+    const formattedSelectedDate = dayjs(date);
 
     // Comparar las fechas sin la hora
-    const isSameDay =
-      formattedSelectedDate.toDateString() === currentDate.toDateString();
+    const isSameDay = formattedSelectedDate.isSame(currentDate, "day");
 
     return isSameDay;
   };
@@ -24,7 +24,7 @@ const MoodVisualization = () => {
   useEffect(() => {
     const tempGroupedObjects = [];
 
-    // Agrupar los objetos por date.groups
+    // Agrupar y ordenar los objetos por date.groups
     context.savedMood.forEach((item) => {
       const groups = item.date.groups;
       const existingGroup = tempGroupedObjects.find(
@@ -37,6 +37,13 @@ const MoodVisualization = () => {
         tempGroupedObjects.push({ groups, items: [item] });
       }
     }, []);
+
+    // Ordenar los grupos por fecha (groups) en orden descendente
+    tempGroupedObjects.sort((a, b) => {
+      const dateA = dayjs(a.groups);
+      const dateB = dayjs(b.groups);
+      return dateB - dateA; // Ordenar en orden descendente
+    });
 
     setGroupedObjects(tempGroupedObjects);
   }, [context.savedMood]);

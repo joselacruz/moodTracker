@@ -10,13 +10,27 @@ import Layout from "../../Components/Layout";
 import { saveToFirebase } from "../../Utils/firebase";
 import SpinnerMessage from "../../Components/SpinnerMessage";
 import axios from "axios";
-import RegistrationPrompt from '../../Components/RegistrationPrompt'
+import RegistrationPrompt from "../../Components/RegistrationPrompt";
+import SuggestButtons from "../../Components/SuggestButtons";
+import { FaSmile, FaSadTear, FaMeh, FaAngry } from "react-icons/fa";
 
 import "./Home.css";
+
+const icons = {
+  feliz: { value: "Feliz", icon: <FaSmile size={64} color="#FFD700" /> },
+  triste: { value: "Triste", icon: <FaSadTear size={64} color="#6495ED" /> },
+  neutral: { value: "Neutral", icon: <FaMeh size={64} color="#A9A9A9" /> },
+  enojado: { value: "Enojado", icon: <FaAngry size={64} color="#FF6347" /> },
+  horrible: {
+    value: "Horrible",
+    icon: <FaSadTear size={64} color="#8B0000" />,
+  },
+};
 
 const Home = () => {
   const context = useContext(MoodContext);
   const contextIsUserAuth = useContext(UserContext);
+  //clase para el boton
   const [buttonColor, setButtonColor] = useState("");
   const [isClick, setIsClick] = useState(false);
   const [isToday, setIsToday] = useState(false);
@@ -24,7 +38,8 @@ const Home = () => {
   const [messageAnalizeSentiment, setMessageAnalizeSentiment] = useState("");
   const [spinnerLoad, setSpinnerLoad] = useState(false);
   const [messageSpinner, setMessageSpinner] = useState("");
-
+  //estado para desplegar Botones del sugerencia del analisis de sentimiento
+  const [displaySuggestButtons, setDisplaySuggestButtons] = useState(false);
   //muestra el titulo dependiendo de lo seleccionado en el calendario
   useEffect(() => {
     const currentDate = new Date();
@@ -60,6 +75,7 @@ const Home = () => {
       context.diaryEntry.length >= 4
     );
   };
+
   //efectto que actualiza areConditionsMet
   useEffect(() => {
     checkConditions();
@@ -73,29 +89,13 @@ const Home = () => {
       setButtonColor(""); //boton sin estilos
     }
   };
-
+  //Activame el boton principal pero prime escucha  se areConditionsMet se cumple
+  //se encribio y selecciono una emocion
   const handleMoodsView = async () => {
-    if (isClick || spinnerLoad) {
-      return;
-    }
-
     if (areConditionsMet()) {
-      setIsClick(true);
-      setSpinnerLoad(true);
-      setMessageSpinner("Analyzing sentiment...");
-
-      try {
-        const sentimentResult = await analizeTextSetiment(context.diaryEntry);
-
-        setIsClick(false);
-        setSpinnerLoad(false);
-
-        if (sentimentResult) {
-          setMessageAnalizeSentiment(sentimentResult);
-        }
-      } catch (error) {
-        console.log("Error analyzing sentiment:", error);
-      }
+      setIsClick(true); //descativamos boton
+      setSpinnerLoad(true); //activamos Spiner
+      analizeTextSetiment(context.diaryEntry); //Llamado Funcion analizar sentimiento
     }
   };
 
@@ -110,60 +110,69 @@ const Home = () => {
 
     try {
       const response = await axios.get(functionUrl, { params: queryParams });
-      const data = response.data.choices[0].message.content;
-      return data;
+      const sentimentResult =
+        response.data.choices[0].message.content.toLowerCase(); // Repuesta del sentimiento analizado
+
+      const sentimientSelect = context.selectedMood.value.toLowerCase(); //Sentimiento usuario
+      //si el analisis de sentimiento es igual al seleccionado
+      if (sentimentResult === sentimientSelect) {
+        savedMoodInContextAndFirebase(context.selectedMood); //Ok guardamos los datos tal Cual
+        setIsClick(false); //activamos el boton
+        setSpinnerLoad(false); //desactivamos  Spiner
+      }
+      //de lo contrario
+      else {
+        //Regex para identificar si el analisis de sentimiento tiene una Sola Palabra example "feliz"
+        const regex = /^(feliz|triste|neutral|enojado|horrible)$/i;
+        const isValid = regex.test(sentimentResult);
+        //si  es cierto  Sugerimos si Desea Cambiar su Seleccion
+        if (isValid) {
+          //sentimiento Almacenado en el estado
+          setMessageAnalizeSentiment(sentimentResult);
+          setMessageSpinner(
+            `Sugerimos Cambiar tu Emocion a ${sentimentResult}`
+          );
+          //mostramos Botones De sugerencia Usamos un Estado Para Activarlos
+          setDisplaySuggestButtons(true);
+        }
+        //si la respuesta de la api no da ninguna segerencia  mostramos el mensaje
+        else {
+          setMessageSpinner(
+            `Sugerimos Cambiar tu Emocion a ${sentimentResult}`
+          );
+
+          // activamos el boton principal siempre y cuando existan cambios en la seleccion o el Diario
+          if (context.selectedMood || context.diaryEntry) {
+            setIsClick(false);
+          }
+        }
+      }
+
+      setSpinnerLoad(false); //desactivacion del espiner
     } catch (error) {
+      setSpinnerLoad(false); //desactiva el spinner
+      // La api de Openai Fallo hagamoslo Saber al usuario
+      setMessageSpinner("No podemos Analizar tus Sentimientos en Este Momento");
+
+      setTimeout(() => {
+        setMessageSpinner(""); //limpia el mensaje al usuario
+        setIsClick(false); //activa el boton
+        savedMoodInContextAndFirebase(context.selectedMood); //Ok igual guardamos los datos tal Cual
+      }, 5000);
       console.log("error", error);
-      setMessageAnalizeSentiment("");
     }
   };
 
-  //Ejecucion Para analizar el texto de Diario
-  useEffect(() => {
-    if (
-      messageAnalizeSentiment &&
-      context.selectedMood.value &&
-      context.selectedMood.value.toLowerCase() ===
-        messageAnalizeSentiment.toLowerCase()
-    ) {
-       setTimeout(() => {
-        setSpinnerLoad(false);
-        savedMoodInContextAndFirebase();
-        setMessageSpinner(""); //lipiamos lo que ya este
-      }, 100);
-    } else {
-      setTimeout(() => {
-    
-        const analizeSentimentText = messageAnalizeSentiment.toLowerCase();
-        const regex = /^(feliz|triste|neutral|enojado|horrible)$/i;
-        const isValid = regex.test(analizeSentimentText);
-        if (isValid) {
-          setMessageSpinner(
-            `Sugerimos Cambiar tu Emocion a ${messageAnalizeSentiment}`
-          );
-          setSpinnerLoad(false);
-          setIsClick(false);
-        } else {
-          setMessageSpinner(messageAnalizeSentiment);
-          setSpinnerLoad(false);
-          setIsClick(false);
-        }
-        context.setSelectedMood({}); //Borramos la seleccion del usuario
-        context.setDiaryEntry(""); //Borramos el texo del usuario
-        setTimeout(() => {       //temp Solucion  Debido al que Cuando se volvia a Dar click si ecogia le emocido suegerida no se ejecutaba
-          setMessageAnalizeSentiment("");
-        }, 2000);
-      }, 1000);
-    }
-  }, [messageAnalizeSentiment]);
-
-  //Guarda Nuesta Emociones en el cotexto Local
+  //Guarda las Emociones que estan en el contexto Local
   //y en Firabase si el en usuario esta autenticado
-  function savedMoodInContextAndFirebase() {
+  //Guarda la emocion del contexto o la sugerida
+  function savedMoodInContextAndFirebase(moodSuggestOrContext) {
+
     context.setSavedMood([
       ...context.savedMood,
       {
-        ...context.selectedMood,
+        // ...context.selectedMood, type
+        ...moodSuggestOrContext,
         date: formatDate(context.selectedDate),
         diaryEntry: context.diaryEntry,
       },
@@ -173,7 +182,7 @@ const Home = () => {
       ? saveToFirebase(
           {
             diaryEntry: context.diaryEntry,
-            value: context.selectedMood.value,
+            value: moodSuggestOrContext.value,
             date: formatDate(context.selectedDate),
           },
           contextIsUserAuth.userUid
@@ -182,6 +191,60 @@ const Home = () => {
 
     context.setSelectedMood({});
     context.setDiaryEntry("");
+  }
+
+  //Acepta la sugerencia de Openai o No
+  function handleSuggestion(event) {
+    //tipo de  boton
+    const type = event.target.className;
+    
+    //si acepta la sugerencia
+    if (type === "suggest btn-suggest") {
+      console.log(type)
+      const newSentimient = selectButtonBykey(messageAnalizeSentiment);
+      setMessageSpinner(""); //limpiamos el mensaje mostrado al usario
+      console.log(newSentimient);
+
+      //Nueva Emocion a Guardar icono y value
+      //Guardamos los los Datos aplicando la sugerencia
+      savedMoodInContextAndFirebase(newSentimient);
+      //cerramos los botones de la sugerencias
+      setDisplaySuggestButtons(false);
+
+      //permitimos nuevamente el boton pricipal para guardar emociones
+      setIsClick(false);
+    } else if (type === "suggest btn-clean") {
+      setMessageSpinner(""); //limpiamos el mensaje mostrado al usario
+      setMessageAnalizeSentiment(""); //limpiamos el estado de almacenamiento Seleccionado
+      context.setSelectedMood({}); //Borramos la seleccion del usuario
+      context.setDiaryEntry(""); //Borramos el texo del usuario
+      setDisplaySuggestButtons(false);
+      //permitimos nuevamente el boton pricipal para guardar emociones
+      setIsClick(false);
+    }
+  }
+
+  // Nueva Emocion a Guardar
+  function selectButtonBykey(key) {
+    let typeIcon;
+    switch (key) {
+      case "feliz":
+        typeIcon = icons.feliz;
+        break;
+      case "triste":
+        typeIcon = icons.triste;
+        break;
+      case "neutral":
+        typeIcon = icons.neutral;
+        break;
+      case "enojado":
+        typeIcon = icons.enojado;
+        break;
+      case "horrible":
+        typeIcon = icons.horrible;
+        break;
+    }
+    return typeIcon;
   }
 
   return (
@@ -200,12 +263,14 @@ const Home = () => {
             Guardar
           </button>
           <SpinnerMessage loading={spinnerLoad} message={messageSpinner} />
+          {displaySuggestButtons && (
+            <SuggestButtons handleClick={handleSuggestion} />
+          )}
         </div>
         {context.savedMood?.length > 0 && <MoodVisualization />}
       </div>
-      {!contextIsUserAuth.user && <RegistrationPrompt/>}
+      {!contextIsUserAuth.user && <RegistrationPrompt />}
     </Layout>
-   
   );
 };
 
