@@ -17,7 +17,6 @@ const CalendarMonthlyChart = () => {
   const handleDateChange = (newValue) => {
     context.setMonthToFilterChart(newValue);
 
-    console.log('Selected month:', newValue.format('MMMM YYYY')); // Mostrar el valor del mes y año
   };
 
   return (

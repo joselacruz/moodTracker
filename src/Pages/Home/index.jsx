@@ -200,10 +200,8 @@ const Home = () => {
 
     //si acepta la sugerencia
     if (type === "suggest btn-suggest") {
-      console.log(type);
       const newSentimient = selectButtonBykey(messageAnalizeSentiment);
       setMessageSpinner(""); //limpiamos el mensaje mostrado al usario
-      console.log(newSentimient);
 
       //Nueva Emocion a Guardar icono y value
       //Guardamos los los Datos aplicando la sugerencia
