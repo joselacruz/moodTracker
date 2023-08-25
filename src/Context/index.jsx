@@ -1,6 +1,5 @@
 import { createContext, useState, useContext, useEffect} from "react";
 import {UserContext}  from "./userContext";
-
 export const MoodContext = createContext();
 
 
@@ -28,6 +27,7 @@ export const MoodProvider = ({ children }) => {
   const [groupedObjects, setGroupedObjects] = useState([]);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
+
 
   const [monthToFilterChart, setMonthToFilterChart] = useState(new Date());
   const [menuMobile, setMenuMobile] = useState(false);

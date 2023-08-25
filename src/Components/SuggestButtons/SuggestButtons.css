@@ -1,14 +1,15 @@
 .SuggestButtons{
-    gap: 5px;
+    gap: 16px;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .suggest{
     border-radius: 2px;
-    width: 70px;
+    width: 90px;
     color: #ffffff;
-    padding: 5px;
+    padding: 8px;
     font-weight: bold;
     outline: none;
     border: none;

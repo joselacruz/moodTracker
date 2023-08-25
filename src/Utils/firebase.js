@@ -6,13 +6,13 @@ import 'firebase/auth';
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
 const firebaseConfig = {
-  apiKey: "AIzaSyAd3yv4mKJFqhO98FitGgikHBKW0cW6Nj4",
-  authDomain: "mood-track-cd.firebaseapp.com",
-  projectId: "mood-track-cd",
-  storageBucket: "mood-track-cd.appspot.com",
-  messagingSenderId: "793150277563",
-  appId: "1:793150277563:web:32a5edc1ec58a2c307669e",
-  measurementId: "G-SBQ0MH5EGC"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -60,19 +60,6 @@ export const signOutUser = async () => {
     throw error;
   }
 };
-
-//guardar 
-
-// export const saveToFirebase = async (dataObject) => {
-//   try {
-//     const docRef = await addDoc(collection(db, "userTexts"), {
-//       dataObject
-//     });
-//     console.log('Text saved to Firestore with document ID:', docRef.id);
-//   } catch (error) {
-//     console.error('Error saving text to Firestore:', error);
-//   }
-// };
 
 
 export  const saveToFirebase= async (data, key) => {

@@ -117,8 +117,10 @@ const Home = () => {
       //si el analisis de sentimiento es igual al seleccionado
       if (sentimentResult === sentimientSelect) {
         savedMoodInContextAndFirebase(context.selectedMood); //Ok guardamos los datos tal Cual
+        setMessageSpinner(""); //sin mensajes al usuario que mostrar
         setIsClick(false); //activamos el boton
         setSpinnerLoad(false); //desactivamos  Spiner
+      
       }
       //de lo contrario
       else {
