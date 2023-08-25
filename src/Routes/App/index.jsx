@@ -7,6 +7,7 @@ import Header from '../../Components/Header';
 import Login from '../../Pages/Login';
 import {UserProvider} from  '../../Context/userContext';
 import  CreateAccount from '../../Pages/CreateAccount';
+import SuccessfulSignUp from '../../Pages/SuccessfulSignUp';
 const App = ()  => {
     const AppRoutes = () => {
         let routes = useRoutes ([
@@ -15,6 +16,7 @@ const App = ()  => {
           {path: '/trends',element: <Trends/>},
           {path: '/login',element: <Login/>},
           {path: '/signup',element: <CreateAccount/>},
+          {path: '/log-in-now',element: <SuccessfulSignUp/>},
         ])
         return routes;
       }

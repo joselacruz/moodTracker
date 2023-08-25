@@ -38,7 +38,7 @@ const CreateAccount = () => {
     try {
       const user = await signUpWithEmailAndPassword(email, password);
       console.log("Registro exitoso",);
-      navigate('/login'); // Redirige al login
+      navigate('/log-in-now'); // Redirige al login
       // Aquí puedes realizar las acciones necesarias después del registro exitoso
     } catch (error) {
       console.error("Error al registrarse:", error.message);
