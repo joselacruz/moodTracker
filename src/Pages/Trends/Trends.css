@@ -14,6 +14,11 @@
     padding-top: 25px;
     justify-content: center;
 }
+.css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
+    background-color: #e0e3e4;
+    border-radius: 4px;
+    padding: 2px 8px;
+}
 
 @media (max-width: 768px) {
    .Trends{

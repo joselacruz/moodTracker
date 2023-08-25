@@ -10,6 +10,7 @@ import Layout from "../../Components/Layout";
 import { saveToFirebase } from "../../Utils/firebase";
 import SpinnerMessage from "../../Components/SpinnerMessage";
 import axios from "axios";
+import RegistrationPrompt from '../../Components/RegistrationPrompt'
 
 import "./Home.css";
 
@@ -117,7 +118,7 @@ const Home = () => {
     }
   };
 
-  //Ejecucion Para analizar el texto de Diaria
+  //Ejecucion Para analizar el texto de Diario
   useEffect(() => {
     if (
       messageAnalizeSentiment &&
@@ -132,9 +133,9 @@ const Home = () => {
       }, 100);
     } else {
       setTimeout(() => {
+    
         const analizeSentimentText = messageAnalizeSentiment.toLowerCase();
         const regex = /^(feliz|triste|neutral|enojado|horrible)$/i;
-
         const isValid = regex.test(analizeSentimentText);
         if (isValid) {
           setMessageSpinner(
@@ -149,6 +150,9 @@ const Home = () => {
         }
         context.setSelectedMood({}); //Borramos la seleccion del usuario
         context.setDiaryEntry(""); //Borramos el texo del usuario
+        setTimeout(() => {       //temp Solucion  Debido al que Cuando se volvia a Dar click si ecogia le emocido suegerida no se ejecutaba
+          setMessageAnalizeSentiment("");
+        }, 2000);
       }, 1000);
     }
   }, [messageAnalizeSentiment]);
@@ -199,7 +203,9 @@ const Home = () => {
         </div>
         {context.savedMood?.length > 0 && <MoodVisualization />}
       </div>
+      {!contextIsUserAuth.user && <RegistrationPrompt/>}
     </Layout>
+   
   );
 };
 

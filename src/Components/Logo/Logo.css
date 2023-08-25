@@ -6,3 +6,9 @@
     font-weight: bold;
     gap: 2px;
 }
+
+@media (max-width: 640px) {
+	.Logo {
+		font-size: 19px;
+	}
+}
