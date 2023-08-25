@@ -1,37 +1,34 @@
-.iconBack-trends{
-    position: absolute;
-    font-size: 28px;
-    position: absolute;
-    left:50px;
-    top: 12px;
-    color: var(--texto);
-    cursor: pointer;
+.iconBack-trends {
+  position: absolute;
+  font-size: 28px;
+  position: absolute;
+  left: 50px;
+  top: 12px;
+  color: var(--texto);
+  cursor: pointer;
 }
 
-.Trends{
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 25px;
-    justify-content: center;
+.Trends {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 25px;
+  justify-content: center;
 }
-.css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
-    background-color: #e0e3e4;
-    border-radius: 4px;
-    padding: 2px 8px;
+.css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
+  background-color: #e0e3e4;
+  border-radius: 4px;
+  padding: 2px 8px;
 }
 
 @media (max-width: 768px) {
-   .Trends{
+  .Trends {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   }
-
-   .MonthlyChart{
-    width:320px;
-    padding: 0;
-}
   }
 
-
-
+  .MonthlyChart {
+    width: 320px;
+    padding: 0;
+  }
+}

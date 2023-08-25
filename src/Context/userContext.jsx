@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-import { FaSmile, FaSadTear, FaMeh, FaAngry } from "react-icons/fa";
-import { checkUserAuth, readFirebase } from "../Utils/firebase.js";
+import { createContext, useState, useEffect } from 'react';
+import { FaSmile, FaSadTear, FaMeh, FaAngry } from 'react-icons/fa';
+import { checkUserAuth, readFirebase } from '../Utils/firebase.js';
 
 export const UserContext = createContext();
 
@@ -15,10 +15,10 @@ const icons = {
 export const UserProvider = ({ children }) => {
   //Usuario Autenticado cambia a True
   const [user, setUser] = useState(false);
-  const [userUid, setUserUid] = useState("");
+  const [userUid, setUserUid] = useState('');
 
   //
-  const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState('');
   //Historial de Mood Usuario
   const [moodHistoyUser, setMoodHistoyUser] = useState([]);
 
@@ -48,19 +48,19 @@ export const UserProvider = ({ children }) => {
     const addIconANewData = obtainNewData.map((item) => {
       let newPropertyValue;
       switch (item.value) {
-        case "Feliz":
+        case 'Feliz':
           newPropertyValue = icons.Feliz;
           break;
-        case "Triste":
+        case 'Triste':
           newPropertyValue = icons.Triste;
           break;
-        case "Neutral":
+        case 'Neutral':
           newPropertyValue = icons.Neutral;
           break;
-        case "Enojado":
+        case 'Enojado':
           newPropertyValue = icons.Enojado;
           break;
-        case "Horrible":
+        case 'Horrible':
           newPropertyValue = icons.Horrible;
           break;
       }

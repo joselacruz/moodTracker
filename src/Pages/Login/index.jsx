@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../../Components/Layout'
+import Layout from '../../Components/Layout';
 import ErrorMessage from '../../Components/ErrorMessage/';
 import { signInWithEmailPassword } from '../../Utils/firebase';
-import { UserContext } from "../../Context/userContext";
+import { UserContext } from '../../Context/userContext';
 import Logo from '../../Components/Logo';
 import './Login.css';
 
@@ -12,19 +12,19 @@ const Login = () => {
   const navigate = useNavigate(); // Hook para la navegación
 
   const form = useRef(null);
-  const [showErrorMessage, setShowErrorMessage] = useState("");
+  const [showErrorMessage, setShowErrorMessage] = useState('');
 
   // Función para manejar el cambio en el campo de email
   const handleInput = (e) => {
     const { name, value } = e.target;
 
-    if (name === "email") {
+    if (name === 'email') {
       const emailRegex =
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?!\d)/;
       if (!emailRegex.test(value)) {
-        e.target.setCustomValidity("Ingresa un correo electrónico válido.");
+        e.target.setCustomValidity('Ingresa un correo electrónico válido.');
       } else {
-        e.target.setCustomValidity("");
+        e.target.setCustomValidity('');
       }
     }
   };
@@ -38,7 +38,7 @@ const Login = () => {
       navigate('/'); // Redirige al usuario a la página de inicio
     } catch (error) {
       setShowErrorMessage(error.message.match(/\(([^)]+)\)/)[1]);
-      console.error("Error al iniciar sesión:", error.message);
+      console.error('Error al iniciar sesión:', error.message);
     }
   };
 
@@ -47,12 +47,12 @@ const Login = () => {
     event.preventDefault();
     const formData = new FormData(form.current);
     const userdata = {
-      email: formData.get("email"),
-      password: formData.get("password"),
+      email: formData.get('email'),
+      password: formData.get('password'),
     };
-    
+
     if (!userdata.email || !userdata.password) {
-      setShowErrorMessage("Por favor, completa todos los campos.");
+      setShowErrorMessage('Por favor, completa todos los campos.');
       return;
     }
 
@@ -63,7 +63,7 @@ const Login = () => {
     <Layout>
       <div className="Login">
         <div className="Login-container">
-        <Logo/>
+          <Logo />
           {showErrorMessage && <ErrorMessage message={showErrorMessage} />}
           <form action="/" className="form" ref={form} onSubmit={handleSubmit}>
             <label htmlFor="email" className="label">

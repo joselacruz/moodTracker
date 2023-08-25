@@ -1,33 +1,27 @@
-import { createContext, useState, useContext, useEffect} from "react";
-import {UserContext}  from "./userContext";
+import { createContext, useState, useContext, useEffect } from 'react';
+import { UserContext } from './userContext';
 export const MoodContext = createContext();
 
-
 export const MoodProvider = ({ children }) => {
-  
   const contextIsUserAuth = useContext(UserContext);
-
 
   //Mood Seleccionado
   const [selectedMood, setSelectedMood] = useState({});
   //Text Area del Diary
-  const [diaryEntry, setDiaryEntry] = useState("");
+  const [diaryEntry, setDiaryEntry] = useState('');
 
-  //Estado para el historial de usuario 
+  //Estado para el historial de usuario
   const [savedMood, setSavedMood] = useState([]);
-  
- useEffect(()=> {
 
-  if(contextIsUserAuth.user === true) {
-    setSavedMood(contextIsUserAuth.moodHistoyUser);
-  }
-  
- },[contextIsUserAuth.moodHistoyUser])
+  useEffect(() => {
+    if (contextIsUserAuth.user === true) {
+      setSavedMood(contextIsUserAuth.moodHistoyUser);
+    }
+  }, [contextIsUserAuth.moodHistoyUser]);
 
   const [groupedObjects, setGroupedObjects] = useState([]);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
-
 
   const [monthToFilterChart, setMonthToFilterChart] = useState(new Date());
   const [menuMobile, setMenuMobile] = useState(false);
@@ -47,8 +41,8 @@ export const MoodProvider = ({ children }) => {
         setSelectedDate,
         monthToFilterChart,
         setMonthToFilterChart,
-        menuMobile, 
-        setMenuMobile
+        menuMobile,
+        setMenuMobile,
       }}
     >
       {children}

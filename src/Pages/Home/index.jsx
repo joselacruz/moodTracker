@@ -120,7 +120,6 @@ const Home = () => {
         setMessageSpinner(""); //sin mensajes al usuario que mostrar
         setIsClick(false); //activamos el boton
         setSpinnerLoad(false); //desactivamos  Spiner
-      
       }
       //de lo contrario
       else {
@@ -169,7 +168,6 @@ const Home = () => {
   //y en Firabase si el en usuario esta autenticado
   //Guarda la emocion del contexto o la sugerida
   function savedMoodInContextAndFirebase(moodSuggestOrContext) {
-
     context.setSavedMood([
       ...context.savedMood,
       {
@@ -199,10 +197,10 @@ const Home = () => {
   function handleSuggestion(event) {
     //tipo de  boton
     const type = event.target.className;
-    
+
     //si acepta la sugerencia
     if (type === "suggest btn-suggest") {
-      console.log(type)
+      console.log(type);
       const newSentimient = selectButtonBykey(messageAnalizeSentiment);
       setMessageSpinner(""); //limpiamos el mensaje mostrado al usario
       console.log(newSentimient);

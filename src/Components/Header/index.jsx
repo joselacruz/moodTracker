@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { MoodContext } from "../../Context";
-import { UserContext } from "../../Context/userContext";
-import { NavLink } from "react-router-dom";
-import ToogleMenu from "../TooogleMenu";
-import UserDetail from "../UserDetail";
-import { PiMaskHappy } from "react-icons/pi";
-import { ImMenu } from "react-icons/im";
-import { FaUserAlt } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from 'react';
+import { MoodContext } from '../../Context';
+import { UserContext } from '../../Context/userContext';
+import { NavLink } from 'react-router-dom';
+import ToogleMenu from '../TooogleMenu';
+import UserDetail from '../UserDetail';
+import { PiMaskHappy } from 'react-icons/pi';
+import { ImMenu } from 'react-icons/im';
+import { FaUserAlt } from 'react-icons/fa';
 
-import "./Header.css";
+import './Header.css';
 
 const Header = () => {
   const [openUserDetail, setOpenUserDetail] = useState(false);
@@ -32,7 +32,7 @@ const Header = () => {
 
   // Establecer el desbordamiento del cuerpo en función del estado del menú móvil
   useEffect(() => {
-    document.body.style.overflow = context.menuMobile ? "hidden" : "auto";
+    document.body.style.overflow = context.menuMobile ? 'hidden' : 'auto';
   }, [context.menuMobile]);
 
   return (
@@ -55,7 +55,7 @@ const Header = () => {
         <li>
           <NavLink
             to="/calendar"
-            className={contexUserIsAuth.user ? "activeStyle" : ""}
+            className={contexUserIsAuth.user ? 'activeStyle' : ''}
           >
             Calendar
           </NavLink>
@@ -65,7 +65,7 @@ const Header = () => {
         <li>
           <NavLink
             to="/trends"
-            className={contexUserIsAuth.user ? "activeStyle" : ""}
+            className={contexUserIsAuth.user ? 'activeStyle' : ''}
           >
             Trends
           </NavLink>
@@ -90,7 +90,7 @@ const Header = () => {
           <li className="login-user-not-auth">
             <NavLink
               to="/login"
-              className={contexUserIsAuth.user ? "activeStyle" : ""}
+              className={contexUserIsAuth.user ? 'activeStyle' : ''}
             >
               Sign In
             </NavLink>
@@ -99,7 +99,9 @@ const Header = () => {
       </ul>
 
       {/* Menú desplegable móvil */}
-      {context.menuMobile && <ToogleMenu onClose={closeMenuMobile}>Hi</ToogleMenu>}
+      {context.menuMobile && (
+        <ToogleMenu onClose={closeMenuMobile}>Hi</ToogleMenu>
+      )}
     </nav>
   );
 };

@@ -1,33 +1,31 @@
-.MoodVisualization{
-    margin-top: 21px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 15px;
-    padding: 10px;
-    
+.MoodVisualization {
+  margin-top: 21px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
 }
-.MoodVisualization-container{
-    border: 1px solid #121a22;
-    text-align: center;
-    border-radius: 8px;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    padding-bottom: 15px;
+.MoodVisualization-container {
+  border: 1px solid #121a22;
+  text-align: center;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 15px;
 }
 
 .MoodVisualization-container h3 {
-    background-color: #000000;
-    opacity: 0.9;
-    margin: 0;
-    padding: 10px;
-    width: 100%;
-    color:#ffffff;
-    margin-bottom: 20px;
-    
+  background-color: #000000;
+  opacity: 0.9;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  color: #ffffff;
+  margin-bottom: 20px;
 }

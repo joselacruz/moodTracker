@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import Calendar from "react-calendar";
-import { AiOutlineCaretUp } from "react-icons/ai";
-import { AiOutlineCaretDown } from "react-icons/ai";
-import "react-calendar/dist/Calendar.css";
-import { MoodContext } from "../../Context";
-import "./DropdownCalendar.css"; 
+import React, { useState, useContext } from 'react';
+import Calendar from 'react-calendar';
+import { AiOutlineCaretUp } from 'react-icons/ai';
+import { AiOutlineCaretDown } from 'react-icons/ai';
+import 'react-calendar/dist/Calendar.css';
+import { MoodContext } from '../../Context';
+import './DropdownCalendar.css';
 
 const DropdownCalendar = () => {
   const context = useContext(MoodContext);
@@ -24,8 +24,9 @@ const DropdownCalendar = () => {
   return (
     <div className="dropdown-calendar-container">
       <button className="calendar-toggle-button" onClick={toggleCalendar}>
-        {context.selectedDate.toDateString()} {/* Muestra la fecha seleccionada */}
-        {isCalendarOpen? <AiOutlineCaretUp/>: <AiOutlineCaretDown/> }
+        {context.selectedDate.toDateString()}{' '}
+        {/* Muestra la fecha seleccionada */}
+        {isCalendarOpen ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
       </button>
       {isCalendarOpen && (
         <div className="calendar-dropdown">
@@ -41,4 +42,3 @@ const DropdownCalendar = () => {
 };
 
 export default DropdownCalendar;
-

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { MoodContext } from "../../Context";
-import { formatDate } from "../../Utils/dateUtils";
-import moment from "moment";
+import React, { useContext, useEffect, useState } from 'react';
+import { MoodContext } from '../../Context';
+import { formatDate } from '../../Utils/dateUtils';
+import moment from 'moment';
 import {
   BarChart,
   Bar,
@@ -11,11 +11,11 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
-import "./MonthlyChart.css";
+import './MonthlyChart.css';
 
-import { UserContext } from "../../Context/userContext";
+import { UserContext } from '../../Context/userContext';
 
 const MonthlyChart = () => {
   // Obtener el contexto de las emociones
@@ -26,7 +26,7 @@ const MonthlyChart = () => {
   // Función para parsear la fecha y obtener el mes y año
   const targetDate = (date) => {
     const { formatedData } = formatDate(date);
-    const [year, month] = formatedData.split("-");
+    const [year, month] = formatedData.split('-');
     return `${year}-${month}`;
   };
 
@@ -53,7 +53,7 @@ const MonthlyChart = () => {
 
   // Agrupar los datos por mes y emoción
   const groupedData = dataForChart.reduce((acc, entry) => {
-    const month = moment(entry.date).format("YYYY-MM");
+    const month = moment(entry.date).format('YYYY-MM');
     if (!acc[month]) {
       acc[month] = [];
     }
@@ -91,7 +91,7 @@ const MonthlyChart = () => {
         <BarChart
           data={monthlyChartData}
           className={`chart-container ${
-            dataForChart.length === 0 ? "inactive" : ""
+            dataForChart.length === 0 ? 'inactive' : ''
           }`}
         >
           <CartesianGrid strokeDasharray="6 6" />
@@ -106,7 +106,7 @@ const MonthlyChart = () => {
               stackId="a"
               fill={
                 dataForChart.find((item) => item.emotion === emotion)?.color ||
-                "#888888"
+                '#888888'
               }
             />
           ))}

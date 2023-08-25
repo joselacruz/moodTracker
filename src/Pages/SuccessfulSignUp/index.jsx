@@ -1,11 +1,11 @@
-import React from "react";
-import Layout from "../../Components/Layout";
+import React from 'react';
+import Layout from '../../Components/Layout';
 import { useNavigate } from 'react-router-dom';
-import Logo from "../../Components/Logo";
-import "./SuccessfulSignUp.css";
+import Logo from '../../Components/Logo';
+import './SuccessfulSignUp.css';
 
 const SuccessfulSignUp = () => {
-    const navigate = useNavigate(); 
+  const navigate = useNavigate();
   return (
     <Layout>
       <div className="SendEmail">

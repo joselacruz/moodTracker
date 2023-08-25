@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { MoodContext } from "../../Context";
-import MoodItem from "../MoodItem";
-import dayjs from "dayjs"; // Importa la biblioteca dayjs
-import "./MoodVisualization.css";
+import React, { useContext, useEffect, useState } from 'react';
+import { MoodContext } from '../../Context';
+import MoodItem from '../MoodItem';
+import dayjs from 'dayjs'; // Importa la biblioteca dayjs
+import './MoodVisualization.css';
 
 const MoodVisualization = () => {
   const context = useContext(MoodContext);
@@ -16,7 +16,7 @@ const MoodVisualization = () => {
     const formattedSelectedDate = dayjs(date);
 
     // Comparar las fechas sin la hora
-    const isSameDay = formattedSelectedDate.isSame(currentDate, "day");
+    const isSameDay = formattedSelectedDate.isSame(currentDate, 'day');
 
     return isSameDay;
   };
@@ -52,7 +52,7 @@ const MoodVisualization = () => {
     <div className="MoodVisualization">
       {groupedObjects.map((grupos, index) => {
         const dayIsToday = IsToday(grupos.groups);
-        const [day, mes, _] = grupos.groups.split("-");
+        const [day, mes, _] = grupos.groups.split('-');
 
         return (
           <div key={index} className="MoodVisualization-container">

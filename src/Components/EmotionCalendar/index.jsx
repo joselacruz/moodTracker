@@ -1,19 +1,17 @@
-import React, { useContext, useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { MoodContext } from "../../Context";
-import MoodItem from "../MoodItem";
-import { AiOutlineCaretDown } from "react-icons/ai";
-import { AiOutlineCaretUp } from "react-icons/ai";
+import React, { useContext, useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { MoodContext } from '../../Context';
+import MoodItem from '../MoodItem';
+import { AiOutlineCaretDown } from 'react-icons/ai';
+import { AiOutlineCaretUp } from 'react-icons/ai';
 
-import "./EmotionCalendar.css";
+import './EmotionCalendar.css';
 
 const EmotionCalendar = () => {
   const context = useContext(MoodContext);
   //emociones a mostrar por fecha
   const [showEmotionsByDate, setShowEmotionsByDate] = useState([]);
-
-
 
   //calendario  movil
   const [isCalendarCollapsed, setIsCalendarCollapsed] = useState(true);
@@ -23,7 +21,7 @@ const EmotionCalendar = () => {
 
   //filtrar  emociones  del array del contexto
   const filterEmotionsByDate = (date) => {
-    const formattedDate = date.toISOString().split("T")[0];
+    const formattedDate = date.toISOString().split('T')[0];
     const emotionsForDate = context.savedMood.filter(
       (e) => e.date.formatedData === formattedDate
     );
@@ -88,12 +86,12 @@ const EmotionCalendar = () => {
 
   return (
     <div
-      className={`EmotionCalendar ${isCalendarCollapsed ? "collapsed" : ""}`}
+      className={`EmotionCalendar ${isCalendarCollapsed ? 'collapsed' : ''}`}
     >
       <h2>Calendario de Emociones</h2>
 
       <button className="toggle-calendar-btn" onClick={toggleCalendar}>
-        {isCalendarCollapsed ? "Show Calendar" : "Hide calendar"}
+        {isCalendarCollapsed ? 'Show Calendar' : 'Hide calendar'}
         {isCalendarCollapsed ? (
           <AiOutlineCaretDown className="toogle-icon" />
         ) : (

@@ -1,8 +1,8 @@
-import { Portal } from "../Portal";
-import { NavLink } from "react-router-dom";
-import UserDetail from "../UserDetail";
-import { CgClose } from "react-icons/cg";
-import "./ToogleMenu.css";
+import { Portal } from '../Portal';
+import { NavLink } from 'react-router-dom';
+import UserDetail from '../UserDetail';
+import { CgClose } from 'react-icons/cg';
+import './ToogleMenu.css';
 
 const ToogleMenu = ({ onClose }) => {
   return (

@@ -1,34 +1,33 @@
-.EmotionCalendar{
+.EmotionCalendar {
   display: flex;
   flex-direction: column;
   gap: 17px;
 }
-.toggle-calendar-btn{
+.toggle-calendar-btn {
   display: none;
 }
 .icon-calendar {
-    overflow: hidden;
-  }
-  
-  .icon-calendar svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .icons-calendar-container {
- 
-    display: flex; 
-    flex-direction: row-reverse;
-    justify-content: center;
-  }
-  
-  .icons-calendar-container:hover {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  @media screen and (max-width: 767px) {
-   .toggle-calendar-btn{
+  overflow: hidden;
+}
+
+.icon-calendar svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icons-calendar-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.icons-calendar-container:hover {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 767px) {
+  .toggle-calendar-btn {
     align-self: center;
     width: 160px;
     display: block;
@@ -38,29 +37,30 @@
     border: none;
     padding: 10px;
     transition: background-color 0.3s ease-in-out;
-    box-shadow: 0px 2px 2px rgb(0 0 0 / 20%), 0px 0px 5px rgb(0 0 0 / 10%), 0px 0px 5px rgb(0 0 0 / 10%);
+    box-shadow:
+      0px 2px 2px rgb(0 0 0 / 20%),
+      0px 0px 5px rgb(0 0 0 / 10%),
+      0px 0px 5px rgb(0 0 0 / 10%);
     border-radius: 4px;
     outline: none;
-}
-.toogle-icon{
-  margin-inline-start: 5px;
-  
-}
+  }
+  .toogle-icon {
+    margin-inline-start: 5px;
+  }
 
-.EmotionCalendar.collapsed .react-calendar {
-  display: none;
-}
+  .EmotionCalendar.collapsed .react-calendar {
+    display: none;
+  }
 
-.EmotionCalendar.collapsed .show-emotion-by-date {
-  display: block;
-}
+  .EmotionCalendar.collapsed .show-emotion-by-date {
+    display: block;
+  }
 
-.EmotionCalendar .react-calendar {
-  display: block;
-}
+  .EmotionCalendar .react-calendar {
+    display: block;
+  }
 
-.EmotionCalendar .show-emotion-by-date {
-  display: none;
+  .EmotionCalendar .show-emotion-by-date {
+    display: none;
+  }
 }
-   }
-

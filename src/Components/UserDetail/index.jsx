@@ -1,12 +1,12 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from "../../Context/userContext";
-import { signOutUser } from "../../Utils/firebase";
-import { MoodContext } from "../../Context";
-import "./UserDetail.css";
+import { UserContext } from '../../Context/userContext';
+import { signOutUser } from '../../Utils/firebase';
+import { MoodContext } from '../../Context';
+import './UserDetail.css';
 
 const UserDetail = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const context = useContext(MoodContext);
   const contexUserIsAuth = useContext(UserContext);
   const typeButton = () => {
@@ -17,8 +17,8 @@ const UserDetail = () => {
     }
   };
   const handleClick = () => {
-    context.setMenuMobile(false); 
-    
+    context.setMenuMobile(false);
+
     if (contexUserIsAuth.user) {
       const handleLogout = async () => {
         try {
@@ -26,8 +26,8 @@ const UserDetail = () => {
           //actualizamos es contexto user a false  para dar a conocer
           //a todos los componentes que  nuestra seccion culmino
           contexUserIsAuth.setUser(false);
-          contexUserIsAuth.setUserEmail(""); //sin email para mostrar
-          window.location.pathname = "/";
+          contexUserIsAuth.setUserEmail(''); //sin email para mostrar
+          window.location.pathname = '/';
         } catch (error) {
           // Manejo de errores si es necesario
         }

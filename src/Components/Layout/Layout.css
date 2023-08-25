@@ -1,8 +1,7 @@
-.Layout{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    top: 80px
-
+.Layout {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  top: 80px;
 }

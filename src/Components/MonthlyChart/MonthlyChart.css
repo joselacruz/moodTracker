@@ -1,32 +1,32 @@
 .MonthlyChart {
-    text-align: center;
-    padding: 20px;
-    width: 600px;
-  }
-  .MonthlyChart h3 {
-    color: var(--texto);
-  }
-  .chart-container{
-    transition: opacity 2000ms ease-in;
-  }
-  
-  .recharts-surface {
-    overflow: visible;
-  }
-  
-  .recharts-bar-rectangles {
-    stroke-width: 0;
-  }
-  
-  .recharts-cartesian-axis-line {
-    stroke-width: 1;
-  }
-  
-  .recharts-cartesian-axis-tick-line {
-    display: none;
-  }
-  
-  .inactive{
-    transition: opacity 1000ms ease-out; 
-    opacity: 0;
-  }
+  text-align: center;
+  padding: 20px;
+  width: 600px;
+}
+.MonthlyChart h3 {
+  color: var(--texto);
+}
+.chart-container {
+  transition: opacity 2000ms ease-in;
+}
+
+.recharts-surface {
+  overflow: visible;
+}
+
+.recharts-bar-rectangles {
+  stroke-width: 0;
+}
+
+.recharts-cartesian-axis-line {
+  stroke-width: 1;
+}
+
+.recharts-cartesian-axis-tick-line {
+  display: none;
+}
+
+.inactive {
+  transition: opacity 1000ms ease-out;
+  opacity: 0;
+}

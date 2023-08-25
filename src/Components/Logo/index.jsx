@@ -1,5 +1,5 @@
-import { PiMaskHappy } from "react-icons/pi";
-import "./Logo.css";
+import { PiMaskHappy } from 'react-icons/pi';
+import './Logo.css';
 
 const Logo = () => {
   return (

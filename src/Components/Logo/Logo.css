@@ -1,14 +1,14 @@
-.Logo{
-    font-size: 30px;
-    color: var(--texto);
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    gap: 2px;
+.Logo {
+  font-size: 30px;
+  color: var(--texto);
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  gap: 2px;
 }
 
 @media (max-width: 640px) {
-	.Logo {
-		font-size: 19px;
-	}
+  .Logo {
+    font-size: 19px;
+  }
 }

@@ -2,25 +2,23 @@
 Texto Secundario: Gris Oscuro (#34495E) - Para un contraste menos intenso en fondos claros.
 Texto en Verde Claro: Blanco (#FFFFFF) - Para resaltar en fondos verdes claros.
 Texto en Verde Oscuro: Blanco (#FFFFFF) - Para resaltar en fondos verdes oscuros. */
-  
-:root{
-    --primaryGreen: #2ECC71;
-    --lightGreen: #A9DFBF;
-    --darkGren: #27AE60;
-    --grisLight: #D5DBDB;
-    --grisDark: #34495E;
-    --texto: #333333;
+
+:root {
+  --primaryGreen: #2ecc71;
+  --lightGreen: #a9dfbf;
+  --darkGren: #27ae60;
+  --grisLight: #d5dbdb;
+  --grisDark: #34495e;
+  --texto: #333333;
 }
 
-*{
-    padding: 0;
-    box-sizing: border-box;
-   
+* {
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    margin: 0;
-    background-color: #F5F5F5;
-    font-family: monospace;
-    
+body {
+  margin: 0;
+  background-color: #f5f5f5;
+  font-family: monospace;
 }

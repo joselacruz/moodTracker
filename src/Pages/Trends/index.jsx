@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { HiChevronDoubleLeft } from "react-icons/hi";
-import Layout from "../../Components/Layout";
-import CalendarMonthlyChart from "../../Components/CalendarMonthlyChart";
-import MonthlyChart from "../../Components/MonthlyChart";
-import "./Trends.css";
+import { NavLink } from 'react-router-dom';
+import { HiChevronDoubleLeft } from 'react-icons/hi';
+import Layout from '../../Components/Layout';
+import CalendarMonthlyChart from '../../Components/CalendarMonthlyChart';
+import MonthlyChart from '../../Components/MonthlyChart';
+import './Trends.css';
 
 const Trends = () => {
   return (
