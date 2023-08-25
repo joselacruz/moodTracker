@@ -18,6 +18,7 @@
   
   .spinner-text {
     font-size: 1rem;
+    margin-inline-start: 5px;
   }
   
   @keyframes spin {

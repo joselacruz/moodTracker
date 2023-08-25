@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { MoodContext } from '../../Context';
-import './styles.css'
+import './DiaryEntry.css'
 
 
 const DiaryEntry = () => {

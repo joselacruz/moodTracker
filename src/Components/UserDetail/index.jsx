@@ -13,7 +13,7 @@ const UserDetail = () => {
     if (contexUserIsAuth.user) {
       return <li onClick={handleClick}>Sign Out</li>;
     } else {
-      return <li onClick={handleClick}>Sing In</li>;
+      return <li onClick={handleClick}>Sign In</li>;
     }
   };
   const handleClick = () => {

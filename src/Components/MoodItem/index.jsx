@@ -1,5 +1,5 @@
 import { FaEllipsisH } from "react-icons/fa";
-import './style.css'
+import './MoodItem.css'
 
 const MoodItem = ({props})  => {
 return(

@@ -1,7 +1,7 @@
 
 .CreateAccount {
 	width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 16vh);
 	display: grid;
 	place-items: center;
 }
@@ -10,17 +10,13 @@
 	grid-template-rows: auto 1fr auto;
 	width: 300px;
 }
-.logo {
-	width: 150px;
-	margin-bottom: 48px;
-	justify-self: center;
-	display: none;
-}
+
 .title {
 	margin-bottom: 36px;
 	text-align: start;
     color: var(--texto);
     text-align: center;
+	font-size: 18px;
 }
 .form {
 	display: flex;

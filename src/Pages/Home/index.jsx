@@ -17,24 +17,18 @@ const Home = () => {
   const context = useContext(MoodContext);
   const contextIsUserAuth = useContext(UserContext);
   const [buttonColor, setButtonColor] = useState("");
-  //Mostrar el loader y desactivar el buttton
   const [isClick, setIsClick] = useState(false);
   const [isToday, setIsToday] = useState(false);
   const [isFuture, setIsFuture] = useState(false);
-
-  //Almcenar el analisis del sentimiento on chat gpt response
   const [messageAnalizeSentiment, setMessageAnalizeSentiment] = useState("");
-  //Estado para Determinar si mostrar el spinner despues del Click
   const [spinnerLoad, setSpinnerLoad] = useState(false);
-  //Muestra el Message Al usuario del resultado del analisis de sentimiento
-  const [messageSpinner, setMessageSpiner] = useState("");
+  const [messageSpinner, setMessageSpinner] = useState("");
 
-  // Verificar si la fecha seleccionada en el calendario corresponde a la de hoy
+  //muestra el titulo dependiendo de lo seleccionado en el calendario
   useEffect(() => {
     const currentDate = new Date();
     const formattedSelectedDate = new Date(context.selectedDate);
 
-    // Comparar las fechas sin la hora
     const isSameDay =
       formattedSelectedDate.toDateString() === currentDate.toDateString();
     const isFutureDate = formattedSelectedDate > currentDate;
@@ -43,7 +37,7 @@ const Home = () => {
     setIsFuture(isFutureDate);
   }, [context.selectedDate]);
 
-  // Función para El Titulo Depenediendo de la fecha seleccionanda
+  //renderiza el titulo
   const getMessage = () => {
     if (isToday) {
       return <h1 className="Home-title">¿Cómo estás hoy?</h1>;
@@ -58,42 +52,53 @@ const Home = () => {
     }
   };
 
-  // Función areConditionsMet para verificar si fue selecionada una emocion y se escribio del diario
+  //Verifica Si se escribio y selecciono una emocion
   const areConditionsMet = () => {
     return (
       Object.keys(context.selectedMood).length > 0 &&
       context.diaryEntry.length >= 4
     );
   };
-
-  // Si areConditionsMet se cumple establecer el color del botón
-  const checkConditions = () => {
-    if (areConditionsMet()) {
-      setButtonColor("active"); // Cambia el color a cumplido
-    } else {
-      setButtonColor(""); // Restaura el color por defecto
-    }
-  };
-
-  // Llamar a checkConditions cuando cambien los valores relevantes
+  //efectto que actualiza areConditionsMet
   useEffect(() => {
     checkConditions();
   }, [context.selectedMood, context.diaryEntry]);
 
-  const handleMoodsView = async (event) => {
-    // verifica que el usuario Escribio y seleccion una Emocion
+  //Uso de areConditionsMet
+  const checkConditions = () => {
     if (areConditionsMet()) {
-      // Si ya se seleccionó un MoodSelection y se escribió en diaryEntry, guardar
-      setIsClick(true); //desactivamos el boton
-      setSpinnerLoad(true); //activamos el spinner
-      setIsClick(false);
-      analizeTextSetiment(context.diaryEntry);
+      setButtonColor("active"); //boton a clase  activa
+    } else {
+      setButtonColor(""); //boton sin estilos
     }
   };
 
-  //Analiza el texto del diario con Openai
-  //su valor es guardado en setMessageAnalizeSentiment
-  //recibe El texto a Analizar
+  const handleMoodsView = async () => {
+    if (isClick || spinnerLoad) {
+      return;
+    }
+
+    if (areConditionsMet()) {
+      setIsClick(true);
+      setSpinnerLoad(true);
+      setMessageSpinner("Analyzing sentiment...");
+
+      try {
+        const sentimentResult = await analizeTextSetiment(context.diaryEntry);
+
+        setIsClick(false);
+        setSpinnerLoad(false);
+
+        if (sentimentResult) {
+          setMessageAnalizeSentiment(sentimentResult);
+        }
+      } catch (error) {
+        console.log("Error analyzing sentiment:", error);
+      }
+    }
+  };
+
+  //Analiza el Texto del Diario en Openai
   const analizeTextSetiment = async (analyze) => {
     const functionUrl =
       "https://jocular-queijadas-9d022c.netlify.app/.netlify/functions/analizeText";
@@ -105,13 +110,51 @@ const Home = () => {
     try {
       const response = await axios.get(functionUrl, { params: queryParams });
       const data = response.data.choices[0].message.content;
-      return setMessageAnalizeSentiment(data);
+      return data;
     } catch (error) {
       console.log("error", error);
+      setMessageAnalizeSentiment("");
     }
   };
 
-  //Guardar emociones  en en contexto Local Asi como Tambie en Firebase
+  //Ejecucion Para analizar el texto de Diaria
+  useEffect(() => {
+    if (
+      messageAnalizeSentiment &&
+      context.selectedMood.value &&
+      context.selectedMood.value.toLowerCase() ===
+        messageAnalizeSentiment.toLowerCase()
+    ) {
+       setTimeout(() => {
+        setSpinnerLoad(false);
+        savedMoodInContextAndFirebase();
+        setMessageSpinner(""); //lipiamos lo que ya este
+      }, 100);
+    } else {
+      setTimeout(() => {
+        const analizeSentimentText = messageAnalizeSentiment.toLowerCase();
+        const regex = /^(feliz|triste|neutral|enojado|horrible)$/i;
+
+        const isValid = regex.test(analizeSentimentText);
+        if (isValid) {
+          setMessageSpinner(
+            `Sugerimos Cambiar tu Emocion a ${messageAnalizeSentiment}`
+          );
+          setSpinnerLoad(false);
+          setIsClick(false);
+        } else {
+          setMessageSpinner(messageAnalizeSentiment);
+          setSpinnerLoad(false);
+          setIsClick(false);
+        }
+        context.setSelectedMood({}); //Borramos la seleccion del usuario
+        context.setDiaryEntry(""); //Borramos el texo del usuario
+      }, 1000);
+    }
+  }, [messageAnalizeSentiment]);
+
+  //Guarda Nuesta Emociones en el cotexto Local
+  //y en Firabase si el en usuario esta autenticado
   function savedMoodInContextAndFirebase() {
     context.setSavedMood([
       ...context.savedMood,
@@ -121,7 +164,7 @@ const Home = () => {
         diaryEntry: context.diaryEntry,
       },
     ]);
-    //Guardar Datos en Firebase Siempre que El usuario este auntenticado
+
     contextIsUserAuth.user
       ? saveToFirebase(
           {
@@ -130,37 +173,12 @@ const Home = () => {
             date: formatDate(context.selectedDate),
           },
           contextIsUserAuth.userUid
-        ) //id Unico de la coleccion user.uid
+        )
       : null;
 
-    // Al guardar, reiniciar el estado de la emoción y el texto
     context.setSelectedMood({});
     context.setDiaryEntry("");
   }
-
-  //cada vez que messageAnalizeSentiment
-  useEffect(() => {
-    //compramos si el sentimiento es de acuerdo con lo que escibio el usuario
-    //si es es asi guardamos si no No
-    if (
-      messageAnalizeSentiment &&
-      context.selectedMood.value &&
-      context.selectedMood.value.toLowerCase() ===
-        messageAnalizeSentiment.toLowerCase()
-    ) {
-      setTimeout(() => {
-        console.log("true");
-        setSpinnerLoad(false); //activamos el boton
-        savedMoodInContextAndFirebase();
-        setMessageSpiner("");
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        setSpinnerLoad(false); //activamos el boton
-        setMessageSpiner(messageAnalizeSentiment);
-      }, 1000);
-    }
-  }, [messageAnalizeSentiment]);
 
   return (
     <Layout>
@@ -173,7 +191,7 @@ const Home = () => {
           <button
             className={`saved-mood ${buttonColor}`}
             onClick={handleMoodsView}
-            disabled={isClick}
+            disabled={isClick || spinnerLoad}
           >
             Guardar
           </button>

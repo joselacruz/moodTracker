@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Layout from "../../Components/Layout";
 import { signUpWithEmailAndPassword } from "../../Utils/firebase";
 import ErrorMessage from "../../Components/ErrorMessage";
+import Logo from '../../Components/Logo';
 import './CreateAccount.css';
 
 const CreateAccount = () => {
@@ -48,34 +48,6 @@ const CreateAccount = () => {
     }
   };
 
-
-
-  const checkAvailableEmail = async (data) => {
-    const response = await axios(`${API}/users`);
-    const emailUse = response.data.some((item) => item.email === data.email);
-    //si el correo no esta hacemos el registo
-    if (!emailUse) {
-      sendData(data);
-    } else {
-      setShowMessage("Este Correo ya esta en uso");
-      setIsClicked(false);
-    }
-  };
-
-  const sendData = async (data) => {
-    try {
-      const response = await axios.post(
-        `${API}/users`,
-        data
-      );
-    } catch (error) {
-      console.error("Error al enviar los datos:", error.message);
-    } finally {
-      //repuesta exitosa enviame a login
-      window.location = "/send-email";
-    }
-  };
-
   const handleInputEmail = (event) => {
     const { name, value } = event.target;
     const emailRegex =
@@ -101,7 +73,8 @@ const CreateAccount = () => {
     <Layout>
            <div className="CreateAccount">
       <div className="CreateAccount-container">
-        <h1 className="title">My account</h1>
+       <Logo/>
+        <h1 className="title">Create acount</h1>
         <form action="/" className="form" ref={form} onSubmit={register}>
           <div>
             <label htmlFor="name" className="label">

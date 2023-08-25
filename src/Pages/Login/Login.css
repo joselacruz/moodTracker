@@ -1,22 +1,17 @@
 
 .Login {
 	width: 100%;
-    padding-top: 100px;
+	height: calc(100vh - 16vh);
 	display: grid;
 	place-items: center;
 
 }
 .Login-container {
 	display: grid;
-	grid-template-rows: auto 1fr auto;
+	grid-template-rows: 54px 1fr auto;
 	width: 300px;
 }
-.logo {
-	width: 150px;
-	margin-bottom: 48px;
-	justify-self: center;
-	display: none;
-}
+
 .form {
 	display: flex;
 	flex-direction: column;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MoodContext } from "../../Context";
 import MoodItem from "../MoodItem";
-import "./styles.css";
+import "./MoodVisualization.css";
 
 const MoodVisualization = () => {
   const context = useContext(MoodContext);

@@ -10,19 +10,18 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
 import "./MonthlyChart.css";
 
-import {UserContext}  from "../../Context/userContext";
+import { UserContext } from "../../Context/userContext";
 
 const MonthlyChart = () => {
   // Obtener el contexto de las emociones
   const context = useContext(MoodContext);
   // Estado local para almacenar los datos filtrados y necesarios
   const [dataForChart, setDataForChart] = useState([]);
-
 
   // Función para parsear la fecha y obtener el mes y año
   const targetDate = (date) => {
@@ -39,8 +38,7 @@ const MonthlyChart = () => {
     (item) => targetDate(item.date.formatedData) === dateRecibeToCalendar
   );
 
-
-  // Actualizar el estado local dataForChart con los datos filtrados 
+  // Actualizar el estado local dataForChart con los datos filtrados
   //cuando cambie la fecha recibida del calendario dateRecibeToCalendar
 
   useEffect(() => {
@@ -51,7 +49,7 @@ const MonthlyChart = () => {
         color: item.icon.props.color,
       })) || []
     );
-  }, [context.savedMood,dateRecibeToCalendar]);
+  }, [context.savedMood, dateRecibeToCalendar]);
 
   // Agrupar los datos por mes y emoción
   const groupedData = dataForChart.reduce((acc, entry) => {
@@ -77,43 +75,43 @@ const MonthlyChart = () => {
       return acc;
     }, {}),
   }));
-   //Texto a Mostrar en el Titulo
-   const renderTitle = () => {
+  //Texto a Mostrar en el Titulo
+  const renderTitle = () => {
     if (dataForChart.length > 0) {
       return <h3>Emotional Trends by Month</h3>;
     } else {
-      return <h3>No Results found for This Date</h3>; 
+      return <h3>No Results found for This Date</h3>;
     }
   };
-  
+
   return (
     <div className="MonthlyChart">
-        {renderTitle()}
-        <ResponsiveContainer width="100%" height={300}>
-  <BarChart
-    data={monthlyChartData}
-    className={`chart-container ${
-      dataForChart.length === 0 ? "inactive" : ""
-    }`}
-  >
-    <CartesianGrid strokeDasharray="6 6" />
-    <XAxis dataKey="month" />
-    <YAxis />
-    <Tooltip />
-    <Legend />
-    {allEmotions.map((emotion, index) => (
-      <Bar
-        key={emotion}
-        dataKey={emotion}
-        stackId="a"
-        fill={
-          dataForChart.find((item) => item.emotion === emotion)?.color ||
-          "#888888"
-        }
-      />
-    ))}
-  </BarChart>
-</ResponsiveContainer>
+      {renderTitle()}
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart
+          data={monthlyChartData}
+          className={`chart-container ${
+            dataForChart.length === 0 ? "inactive" : ""
+          }`}
+        >
+          <CartesianGrid strokeDasharray="6 6" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {allEmotions.map((emotion, index) => (
+            <Bar
+              key={emotion}
+              dataKey={emotion}
+              stackId="a"
+              fill={
+                dataForChart.find((item) => item.emotion === emotion)?.color ||
+                "#888888"
+              }
+            />
+          ))}
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Layout from '../../Components/Layout'
 import ErrorMessage from '../../Components/ErrorMessage/';
 import { signInWithEmailPassword } from '../../Utils/firebase';
 import { UserContext } from "../../Context/userContext";
+import Logo from '../../Components/Logo';
 import './Login.css';
 
 const Login = () => {
@@ -62,7 +63,7 @@ const Login = () => {
     <Layout>
       <div className="Login">
         <div className="Login-container">
-          <img alt="logo" className="logo" />
+        <Logo/>
           {showErrorMessage && <ErrorMessage message={showErrorMessage} />}
           <form action="/" className="form" ref={form} onSubmit={handleSubmit}>
             <label htmlFor="email" className="label">
@@ -87,7 +88,7 @@ const Login = () => {
             <button type="submit" className="primary-button login-button">
               Login
             </button>
-            <a href="/password-recovery">Forgot my password</a>
+            <a>Forgot my password</a>
           </form>
           <button
             className="secondary-button signup-button"
